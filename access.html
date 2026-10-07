@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request access — OpenBoardroom</title>
+  <meta name="description" content="Request early access to OpenBoardroom hosted evaluations.">
+  <meta name="theme-color" content="#f5f4ef">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/" aria-label="OpenBoardroom home">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><circle cx="16" cy="16" r="7" fill="none" stroke="var(--bg)" stroke-width="2.5"/><circle cx="16" cy="16" r="2.4" fill="var(--bg)"/></svg>
+      OpenBoardroom
+    </a>
+    <nav aria-label="Primary">
+      <a href="/#environment">Environment</a>
+      <a href="/#tasks">Tasks</a>
+      <a href="/#results">Results</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/#team">Team</a>
+      <a class="nav-cta" href="/access">Request access</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+  <section class="wrap access">
+    <div>
+      <p class="eyebrow">Early access</p>
+      <h1>Request access.</h1>
+      <p class="lede">Tell us what you're building. We read every request and reply within a few days.</p>
+      <ul class="ticks">
+        <li>Hosted evaluation runs</li>
+        <li>LLM-driven board actors</li>
+        <li>A say in the roadmap</li>
+      </ul>
+    </div>
+    <form id="access-form" class="form" novalidate>
+      <label>Name<input name="name" type="text" autocomplete="name" required></label>
+      <label>Work email<input name="email" type="email" autocomplete="email" placeholder="you@company.com" required></label>
+      <label>Company or project<input name="org" type="text" autocomplete="organization"></label>
+      <label>What are you building?
+        <select name="use">
+          <option>Training or evaluating agents</option>
+          <option>Research</option>
+          <option>Decision-support product</option>
+          <option>Just exploring</option>
+        </select>
+      </label>
+      <label>Anything else?<textarea name="note" rows="3"></textarea></label>
+      <button class="btn primary" type="submit">Send request</button>
+      <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year">2026</span> OpenBoardroom · Founded 2025</span>
+    <span class="links">
+      <a href="/pricing">Pricing</a>
+      <a href="/access">Request access</a>
+      <a href="mailto:hello@openboardroom.tech">Contact</a>
+    </span>
+  </div>
+</footer>
+<script src="/main.js" defer></script>

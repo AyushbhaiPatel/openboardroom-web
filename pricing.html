@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing — OpenBoardroom</title>
+  <meta name="description" content="Planned plans for OpenBoardroom: free open environment, early-access hosted evaluations, and custom enterprise.">
+  <meta name="theme-color" content="#f5f4ef">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/" aria-label="OpenBoardroom home">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><circle cx="16" cy="16" r="7" fill="none" stroke="var(--bg)" stroke-width="2.5"/><circle cx="16" cy="16" r="2.4" fill="var(--bg)"/></svg>
+      OpenBoardroom
+    </a>
+    <nav aria-label="Primary">
+      <a href="/#environment">Environment</a>
+      <a href="/#tasks">Tasks</a>
+      <a href="/#results">Results</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/#team">Team</a>
+      <a class="nav-cta" href="/access">Request access</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+  <section class="wrap hero page-hero">
+    <p class="eyebrow">Pricing</p>
+    <h1>Simple plans, shaped with early users.</h1>
+    <p class="lede">OpenBoardroom is in early access. These are the plans we're building toward; final pricing is set with our first teams.</p>
+  </section>
+
+  <section class="wrap plans">
+    <article class="plan">
+      <h3>Open</h3>
+      <p class="price">Free</p>
+      <p class="plan-sub">For researchers and builders trying the environment.</p>
+      <ul>
+        <li>Full boardroom environment</li>
+        <li>6 graded tasks, seed-reproducible</li>
+        <li>Deterministic baseline policies</li>
+        <li>Community support</li>
+      </ul>
+      <a class="btn" href="https://huggingface.co/spaces/ayushbhaiPatel/boardroom-env" target="_blank" rel="noopener">Try the live demo</a>
+    </article>
+
+    <article class="plan featured">
+      <span class="tag">Early access</span>
+      <h3>Teams</h3>
+      <p class="price">Free during beta</p>
+      <p class="plan-sub">For teams evaluating and training decision-making agents.</p>
+      <ul>
+        <li>Everything in Open</li>
+        <li>Hosted evaluation runs</li>
+        <li>LLM-driven board actors</li>
+        <li>Reasoning graded with rubrics</li>
+        <li>Priority email support</li>
+      </ul>
+      <a class="btn primary" href="/access">Request access</a>
+    </article>
+
+    <article class="plan">
+      <h3>Enterprise</h3>
+      <p class="price">Custom</p>
+      <p class="plan-sub">For organisations building decision-support agents.</p>
+      <ul>
+        <li>Private, custom scenarios</li>
+        <li>Dedicated evaluation environment</li>
+        <li>Security and data review</li>
+        <li>Direct line to the founders</li>
+      </ul>
+      <a class="btn" href="mailto:hello@openboardroom.tech">Talk to us</a>
+    </article>
+  </section>
+
+  <section class="wrap section faq">
+    <h2>Questions</h2>
+    <details><summary>Is this live today?</summary><p>The open environment and live demo are available now. Hosted runs and the Teams features are in early access and rolling out to the first users.</p></details>
+    <details><summary>What will paid plans cost?</summary><p>We haven't set final prices. Early-access teams get the beta free and a say in how pricing is shaped.</p></details>
+    <details><summary>Can I bring my own model?</summary><p>Yes. The environment follows the OpenEnv step, reset and state interface, so any agent that can emit the JSON actions can run against it.</p></details>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year">2026</span> OpenBoardroom · Founded 2025</span>
+    <span class="links">
+      <a href="/pricing">Pricing</a>
+      <a href="/access">Request access</a>
+      <a href="mailto:hello@openboardroom.tech">Contact</a>
+    </span>
+  </div>
+</footer>
+<script src="/main.js" defer></script>

@@ -20,14 +20,21 @@ if ('IntersectionObserver' in window) {
   bars.forEach(el => el.classList.add('in'));
 }
 
-const copy = document.getElementById('copy');
-const hint = document.getElementById('copy-hint');
-copy.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(copy.dataset.copy);
-    hint.textContent = 'Copied.';
-  } catch {
-    hint.textContent = copy.dataset.copy;
-  }
-  setTimeout(() => (hint.textContent = ''), 2500);
-});
+
+const form = document.getElementById('access-form');
+if (form) {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    const d = Object.fromEntries(new FormData(form));
+    if (!d.name || !/^\S+@\S+\.\S+$/.test(d.email || '')) {
+      msg.textContent = 'Please add your name and a valid email.';
+      msg.className = 'form-msg err';
+      return;
+    }
+    const body = `Name: ${d.name}\nEmail: ${d.email}\nCompany: ${d.org || '-'}\nBuilding: ${d.use}\n\n${d.note || ''}`;
+    window.location.href = 'mailto:hello@openboardroom.tech?subject=' + encodeURIComponent('Early access request') + '&body=' + encodeURIComponent(body);
+    msg.textContent = 'Your email app should open with the request ready to send.';
+    msg.className = 'form-msg';
+  });
+}

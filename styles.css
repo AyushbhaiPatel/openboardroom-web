@@ -160,3 +160,35 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 14px; co
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .bar i::after { transition: none; }
 }
+
+/* pages */
+.page-hero { padding-bottom: 32px; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 24px; }
+.plan { position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+.plan.featured { border-color: var(--ink); }
+.plan h3 { font: 500 26px var(--serif); letter-spacing: -.01em; margin: 0 0 6px; }
+.plan .price { font: 400 30px/1.2 var(--serif); margin: 0 0 6px; }
+.plan-sub { color: var(--muted); font-size: 14px; min-height: 44px; }
+.plan ul { list-style: none; padding: 0; margin: 8px 0 28px; flex: 1; }
+.plan li { padding: 9px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+.plan .btn { text-align: center; }
+.tag { position: absolute; top: 16px; right: 16px; font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .06em; background: var(--ink); color: var(--bg); padding: 4px 9px; border-radius: 99px; }
+.faq { max-width: 760px; }
+.faq h2 { margin-bottom: 24px; }
+details { border-top: 1px solid var(--line); padding: 18px 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+summary::after { content: "+"; color: var(--muted); }
+details[open] summary::after { content: "–"; }
+details p { color: var(--muted); margin: 12px 0 0; font-size: 15px; }
+.access { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; padding-top: clamp(64px, 10vw, 112px); padding-bottom: clamp(64px, 10vw, 112px); align-items: start; }
+.ticks { list-style: none; padding: 0; margin: 0; }
+.ticks li { padding: 8px 0 8px 26px; position: relative; color: var(--muted); }
+.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--good); }
+.form { border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: grid; gap: 18px; background: var(--bg-2); }
+.form label { display: grid; gap: 6px; font-size: 13px; font-weight: 500; }
+.form input, .form select, .form textarea { font: 15px var(--sans); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 11px 12px; width: 100%; }
+.form input:focus, .form select:focus, .form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.form-msg { margin: 0; font-size: 14px; color: var(--good); min-height: 1.2em; }
+.form-msg.err { color: var(--accent); }
+@media (max-width: 800px) { .plans, .access { grid-template-columns: 1fr; gap: 32px; } }
