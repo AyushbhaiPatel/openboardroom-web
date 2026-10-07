@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBoardroom — Training AI to make defensible decisions</title>
+  <meta name="description" content="OpenBoardroom is an open benchmark and RL environment where AI agents play Chief Data Officer at a simulated SaaS company: noisy data, biased stakeholders, and a board vote.">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta property="og:title" content="OpenBoardroom">
+  <meta property="og:description" content="An open environment for training and evaluating AI decision-making under uncertainty.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://openboardroom.tech">
+  <link rel="canonical" href="https://openboardroom.tech">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/" aria-label="OpenBoardroom home">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><circle cx="16" cy="16" r="7" fill="none" stroke="var(--bg)" stroke-width="2.5"/><circle cx="16" cy="16" r="2.4" fill="var(--bg)"/></svg>
+      OpenBoardroom
+    </a>
+    <nav aria-label="Primary">
+      <a href="#environment">Environment</a>
+      <a href="#tasks">Tasks</a>
+      <a href="#results">Results</a>
+      <a href="#team">Team</a>
+      <a class="nav-cta" href="https://huggingface.co/spaces/ayushbhaiPatel/boardroom-env" target="_blank" rel="noopener">Live demo ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <p class="eyebrow">Open benchmark · RL environment</p>
+    <h1>Teach AI to make decisions that survive the boardroom.</h1>
+    <p class="lede">OpenBoardroom simulates a SaaS company's quarterly review. An agent plays Chief Data Officer: it reads noisy dashboards, pushes back on biased executives, runs what-if simulations, and wins, or loses, a board vote. Every episode is graded and auditable.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://huggingface.co/spaces/ayushbhaiPatel/boardroom-env" target="_blank" rel="noopener">Try the live environment</a>
+      <a class="btn" href="https://github.com/AyushbhaiPatel/openenv-boardroom" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <figure class="episode" aria-label="Example episode">
+      <figcaption><span>Episode · hard · seed 42</span><span>multi-agent</span></figcaption>
+<pre><code><span class="c"># the Risk Officer flags a breached threshold; the CEO is pushing to ship</span>
+<span class="k">present_evidence</span> {"target": "cfo", "metric": "support_load", "value": 0.92}
+<span class="r">+0.15</span>  cfo → <span class="g">evidence_based</span>  <span class="r">+0.20</span>
+
+<span class="k">negotiate</span> {"target": "ceo", "position": "Delay until support capacity improves."}
+<span class="r">+0.05</span>  lobbying reduced
+
+<span class="k">make_decision</span> {"decision": "delay feature x launch", "rollout_percentage": 10}
+board vote  ceo <span class="x">reject</span> · cfo <span class="g">approve</span> · risk_officer <span class="g">approve</span>
+<span class="r">+0.20</span>  result: <span class="g">approved</span></code></pre>
+    </figure>
+  </section>
+
+  <section class="band" id="problem">
+    <div class="wrap grid-3">
+      <div>
+        <h3>Decisions, not retrieval</h3>
+        <p>Most agent benchmarks test whether a model can find a fact or call a tool. The hard part of real work is choosing between conflicting signals and defending the choice.</p>
+      </div>
+      <div>
+        <h3>Pressure is part of the test</h3>
+        <p>Stakeholders have agendas. Dashboards are noisy. Some metrics are quietly suppressed. An agent has to resist framing, not just compute an answer.</p>
+      </div>
+      <div>
+        <h3>Auditable by design</h3>
+        <p>Each episode ends with a <code>final_score</code>, an <code>oracle_answer</code>, an <code>oracle_hit</code> flag and a full audit trail. Seeds make every run reproducible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="environment">
+    <div class="section-head">
+      <p class="eyebrow">The environment</p>
+      <h2>Three actors. One vote.</h2>
+      <p class="sub">In the multi-agent boardroom, three rule-based actors respond at every step. The agent needs two of three to carry a decision.</p>
+    </div>
+    <div class="cards">
+      <article>
+        <h4>CEO</h4>
+        <p>Holds a hidden launch agenda on hard tasks, lobbies the CFO whenever he is ignored, and suppresses <code>support_load</code> and <code>release_risk</code>. Can be countered with <code>negotiate</code>.</p>
+      </article>
+      <article>
+        <h4>CFO</h4>
+        <p>Tracks budget independently. Moves between <em>neutral</em>, <em>pro_launch</em> and <em>evidence_based</em> depending on whether lobbying or evidence is winning.</p>
+      </article>
+      <article>
+        <h4>Risk Officer</h4>
+        <p>Watches support load against a difficulty-scaled threshold, raises alerts when it is breached, and unlocks deeper intel when the agent cites the right evidence.</p>
+      </article>
+    </div>
+
+    <div class="spec">
+      <div>
+        <h4>Seven actions</h4>
+        <p class="mono small">query_data · analyze_trend · consult_stakeholder · simulate_counterfactual · present_evidence · negotiate · make_decision</p>
+      </div>
+      <div>
+        <h4>Dense rewards</h4>
+        <p>Every step earns signal: evidence, negotiation, a caught hidden metric (+0.30), a flipped CFO (+0.20), the board vote (±0.20). Ignoring a Risk Officer alert costs −0.15.</p>
+      </div>
+      <div>
+        <h4>OpenEnv compatible</h4>
+        <p>Standard <code>reset</code>, <code>step</code> and <code>state</code> APIs. Containerised and deployed as a Hugging Face Space.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="tasks">
+    <div class="wrap section">
+      <div class="section-head">
+        <p class="eyebrow">Tasks</p>
+        <h2>Six graded scenarios.</h2>
+        <p class="sub">Three business questions, each run single-agent and with the full board. Every task has a programmatic grader returning a score in [0, 1].</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Task</th><th>Level</th><th>What the grader looks for</th></tr></thead>
+          <tbody>
+            <tr><td>Find the growth bottleneck</td><td>Easy</td><td>Relevant KPI queries, trend inspection, decision quality, oracle match</td></tr>
+            <tr><td>Diagnose the revenue drop</td><td>Medium</td><td>Noise-aware trend analysis, stakeholder diversity, explanation quality</td></tr>
+            <tr><td>Should we launch Feature X?</td><td>Hard</td><td>Counterfactual quality, launch reasoning, a structured rollout and rollback plan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Multi-agent variants add board vote, actor evidence, lobbying resistance, CFO stance flips and hidden-metric reveals.</p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="results">
+    <div class="section-head">
+      <p class="eyebrow">Results</p>
+      <h2>A stable baseline to beat.</h2>
+      <p class="sub">Scores from the deterministic, scenario-aware baseline policy over fixed seeds 0–99. This is the bar a learned policy has to clear, not a trained model.</p>
+    </div>
+
+    <div class="bars" role="img" aria-label="Baseline mean scores by difficulty for single-agent and multi-agent tasks">
+      <div class="bar-group">
+        <h4>Single-agent</h4>
+        <div class="bar" data-v="0.9593"><span>Easy</span><i></i><b>0.959</b></div>
+        <div class="bar" data-v="0.9428"><span>Medium</span><i></i><b>0.943</b></div>
+        <div class="bar" data-v="0.9846"><span>Hard</span><i></i><b>0.985</b></div>
+      </div>
+      <div class="bar-group">
+        <h4>Multi-agent</h4>
+        <div class="bar" data-v="0.9749"><span>Easy</span><i></i><b>0.975</b></div>
+        <div class="bar" data-v="0.9278"><span>Medium</span><i></i><b>0.928</b></div>
+        <div class="bar" data-v="0.9108"><span>Hard</span><i></i><b>0.911</b></div>
+      </div>
+    </div>
+
+    <ul class="facts">
+      <li><strong>164</strong><span>unit, property-based and integration tests</span></li>
+      <li><strong>6</strong><span>deterministic, graded tasks</span></li>
+      <li><strong>100</strong><span>fixed seeds per difficulty tier</span></li>
+    </ul>
+  </section>
+
+  <section class="band" id="roadmap">
+    <div class="wrap section">
+      <div class="section-head">
+        <p class="eyebrow">Where we are</p>
+        <h2>Built in the open, training next.</h2>
+      </div>
+      <ol class="timeline">
+        <li class="done"><b>Environment</b><span>Single-agent and multi-agent boardroom, reward calculators, graders, OpenEnv spec.</span></li>
+        <li class="done"><b>Baselines</b><span>Reproducible policy benchmarks and a naive-versus-policy reward demo.</span></li>
+        <li class="done"><b>Deployment</b><span>Dockerised, live on Hugging Face Spaces.</span></li>
+        <li><b>GRPO training</b><span>Curriculum from easy to hard with Unsloth and TRL. Script is ready; the full GPU run is next.</span></li>
+        <li><b>More scenarios</b><span>Additional company archetypes and harder stakeholder dynamics.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap section" id="team">
+    <div class="section-head">
+      <p class="eyebrow">Team</p>
+      <h2>Two founders, one environment.</h2>
+      <p class="sub">We think the next gap in AI isn't answering questions, it's making calls that hold up under scrutiny. OpenBoardroom is how we measure and train for that.</p>
+    </div>
+    <div class="people">
+      <a href="https://github.com/AyushbhaiPatel" target="_blank" rel="noopener"><b>Ayush Patel</b><span>Co-founder · github.com/AyushbhaiPatel</span></a>
+      <a href="https://github.com/dharmitpatel81" target="_blank" rel="noopener"><b>Dharmit Patel</b><span>Co-founder · github.com/dharmitpatel81</span></a>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Building agents that decide?</h2>
+      <p>Run the environment, beat the baseline, or tell us what scenario you want to see next.</p>
+      <div class="actions center">
+        <a class="btn primary" href="mailto:hello@openboardroom.tech">hello@openboardroom.tech</a>
+        <button class="btn" type="button" id="copy" data-copy='pip install -e ".[dev]" && python -m my_env.baseline_agent'>Copy quick start</button>
+      </div>
+      <p class="mono small hint" id="copy-hint" aria-live="polite"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year">2026</span> OpenBoardroom</span>
+    <span class="links">
+      <a href="https://github.com/AyushbhaiPatel/openenv-boardroom" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://huggingface.co/spaces/ayushbhaiPatel/boardroom-env" target="_blank" rel="noopener">Hugging Face</a>
+      <a href="mailto:hello@openboardroom.tech">Contact</a>
+    </span>
+  </div>
+</footer>
+
+<script src="/main.js" defer></script>
+</body>
+</html>
